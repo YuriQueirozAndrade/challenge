@@ -14,6 +14,10 @@
 - [x] Task models
 - [x] Comment models
 
+### Database relation ships and properties
+
+- [ ] Create migration file with all rules and properties requeires
+
 ### Controllers
 
 #### User controller
@@ -27,66 +31,63 @@
 
 - [ ] Delete user by Id
 
+- [x] User CRUD operations only owner account
+
 #### Task controller
 
-- [ ] Create task
+- [x] Create task
 
-- [ ] Get all user task
+- [x] Get all user task
 
-- [ ] Update user task
+- [x] Update user task
 
-- [ ] Delete user task
+- [x] Delete user task
 
 #### Comment controller
 
-- [ ] Create comment
+- [x] Create comment
 
-- [ ] Get comment
+- [x] Get comment
 
-- [ ] Delete comment
+- [x] Delete comment
 
 ### Views
 
 #### Set Roles
 
-- [ ] Non-Logged User
-- [ ] Common User
+- [x] Non-Logged User
+- [x] Common User
 - [ ] Admin User
 
 #### Non-Users:
 
-- [ ] Create user
-- [ ] Login
+- [x] Create user
+- [x] Login
 
 #### Common User
 
-- [ ] View all current user tasks
-- [ ] CRUD Operation with current user tasks
+- [x] View all current user tasks
+- [x] CRUD Operation with current user tasks
 
 #### Admin
 
 - [ ] Same grants of common user
 - [ ] Can CRUD Operations with users
 
-##### Plus
+#### Test
 
-Implements comment system to task
+- [ ] User Controller
+- [ ] Task Controller
+- [ ] Comment Controller
 
 ---
 
 ## Front End
 
-- [ ] Login forms
+- [ ] Account forms
 - [ ] The Home page
 
 ### Task Forms
 
 - [ ] Create Form
 - [ ] Edit Form
-
-## Current Situation :
-
-For now i will implements only operation with task.
-Any users will can by alteration and create task,
-to futere i will be implements user handler and i no have ideal if
-i will implements comment fuction
