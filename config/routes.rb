@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   resources :comments
   resources :tasks
-  resources :users
+  # resources :users
+
+  post "/users", to: "users#create"
+  get "/me", to: "users#me"
+  post "/auth/login", to: "auth#login"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
