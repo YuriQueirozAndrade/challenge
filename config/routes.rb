@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :tasks
+  resources :tasks do
+    resources :comments
+  end
   # resources :users
 
   post "/users", to: "users#create"
   get "/me", to: "users#me"
+  delete "/users/delete", to: "users#destroy"
   post "/auth/login", to: "auth#login"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

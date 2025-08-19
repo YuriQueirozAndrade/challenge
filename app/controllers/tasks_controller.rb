@@ -3,9 +3,8 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
-
-    render json: @tasks
+    @tasks = current_user.tasks.includes(:comments).order(created_at: :desc)
+    render json: @tasks, status: :ok
   end
 
   # GET /tasks/1
@@ -15,7 +14,7 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     if @task.save
       render json: @task, status: :created, location: @task
@@ -35,17 +34,26 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1
   def destroy
-    @task.destroy!
+    @task.destroy
+    head :no_content
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.expect(task: [ :name, :start_date, :end_date, :cost, :status, :user_id ])
-    end
+private
+
+  def set_task
+    @task = current_user.tasks.includes(:comments).find_by!(id: params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Task not found" }, status: :not_found
+  end
+
+  def task_params
+    params.require(:task).permit(:name, :start_date, :end_date, :cost, :status)
+  end
+end
+# app/serializers/task_serializer.rb
+class TaskSerializer < ActiveModel::Serializer
+  attributes :id, :name, :start_date, :end_date, :cost, :status
+
+  has_many :comments
 end

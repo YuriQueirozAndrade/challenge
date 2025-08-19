@@ -3,28 +3,31 @@ class CommentsController < ApplicationController
 
   # GET /comments
   def index
-    @comments = Comment.all
-
+    @comments = current_user.comments.order(created_at: :desc)
     render json: @comments
   end
 
-  # GET /comments/1
+  # GET /tasks/:task_id/comments/:id
   def show
     render json: @comment
   end
 
-  # POST /comments
+  # POST /tasks/:task_id/comments
   def create
-    @comment = Comment.new(comment_params)
+    task = current_user.tasks.find_by!(id: params[:task_id])
+
+    @comment = task.comments.build(comment_params.merge(user_id: current_user.id))
 
     if @comment.save
-      render json: @comment, status: :created, location: @comment
+      render json: @comment, status: :created
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Task not found" }, status: :not_found
   end
 
-  # PATCH/PUT /comments/1
+  # PATCH/PUT /tasks/:task_id/comments/:id
   def update
     if @comment.update(comment_params)
       render json: @comment
@@ -33,19 +36,23 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1
+  # DELETE /tasks/:task_id/comments/:id
   def destroy
-    @comment.destroy!
+    @comment.destroy
+    head :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find(params.expect(:id))
+      task = current_user.tasks.find_by!(id: params[:task_id])
+
+      @comment = task.comments.find_by!(id: params[:id])
+
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: "Comment or task not found" }, status: :not_found
     end
 
-    # Only allow a list of trusted parameters through.
     def comment_params
-      params.expect(comment: [ :text, :user_id, :task_id ])
+      params.require(:comment).permit(:text)
     end
 end
