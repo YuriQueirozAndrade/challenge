@@ -10,15 +10,15 @@
 
 ### Models inplements
 
-- [ ] User models
-- [ ] Task models
-- [ ] Comment models
+- [x] User models
+- [x] Task models
+- [x] Comment models
 
 ### Controllers
 
 #### User controller
 
-- [ ] Create user
+- [x] Create user
 
 - [ ] Get user by Id
 - [ ] Get user by Email
@@ -90,4 +90,3 @@ For now i will implements only operation with task.
 Any users will can by alteration and create task,
 to futere i will be implements user handler and i no have ideal if
 i will implements comment fuction
-
