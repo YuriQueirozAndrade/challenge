@@ -51,9 +51,3 @@ private
     params.require(:task).permit(:name, :start_date, :end_date, :cost, :status)
   end
 end
-# app/serializers/task_serializer.rb
-class TaskSerializer < ActiveModel::Serializer
-  attributes :id, :name, :start_date, :end_date, :cost, :status
-
-  has_many :comments
-end

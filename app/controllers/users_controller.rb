@@ -17,10 +17,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    # Find the user by their email from the request body
     user_to_delete = User.find_by(email: params[:email])
 
-    # Check if the user exists and if they match the current authenticated user
     if user_to_delete && user_to_delete == current_user
       user_to_delete.destroy
       head :no_content
