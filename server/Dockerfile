@@ -2,8 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t seu_condominio_new_attemp .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name seu_condominio_new_attemp seu_condominio_new_attemp
+# docker build -t seu_condominio.
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name seu_condominio seu_condominio
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
