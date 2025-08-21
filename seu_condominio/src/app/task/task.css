@@ -1,0 +1,85 @@
+/* Styling for the overall task card container */
+.task-card {
+  background-color: #e0e6e9; /* Re-added the background color */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Hover effect for the entire card */
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for the header, which acts as a button */
+/* Styling for the task name text */
+.task-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+  white-space: nowrap; /* Prevents the text from wrapping to the next line */
+  overflow: hidden; /* Hides any text that overflows its container */
+  text-overflow: ellipsis; /* Displays an ellipsis for the clipped text */
+}
+
+/* Updated header styling to allow the task name to take available space */
+#task-header {
+  border-radius: 12px 12px 0 0;
+  gap: 10px;
+}
+.edit-button-container {
+}
+
+.edit-button {
+  background: linear-gradient(to top, #ffc107, #ff9800);
+  border: 1px solid #ff8f00;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.edit-button:hover {
+  /* Reverse the gradient on hover for a nice effect */
+  background: linear-gradient(to top, #ff9800, #ffc107);
+}
+/* Styling for task status badges */
+.task-status {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.status-0 {
+  background-color: #e74c3c;
+}
+
+.status-1 {
+  background-color: #f39c12;
+}
+
+.status-2 {
+  background-color: #27ae60;
+}
+
+/* Styling for task details */
+.task-details {
+  padding: 15px 20px;
+}
+
+.task-details p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.85rem;
+}

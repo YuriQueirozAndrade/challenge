@@ -1,0 +1,23 @@
+<main class="task-card">
+  <button (click)="toggleView()" class="default-header" id="task-header" *ngIf="!isEditMode">
+    <h1 class="task-name">{{ task.name }}</h1>
+    <span class="edit-button-container">
+      <button (click)="$event.stopPropagation(); toggleEditMode()" class="edit-button">
+        Editar
+      </button>
+    </span>
+  </button>
+
+  <app-task-details
+    [task]="task"
+    *ngIf="!isEditMode && viewDetails">
+  </app-task-details>
+
+  <app-task-form
+    *ngIf="isEditMode"
+    [title]="'Editar Tarefa'"
+    [isEditMode]="isEditMode"
+    [task]="task"
+    (formClosed)="hideForm()">
+  </app-task-form>
+</main>

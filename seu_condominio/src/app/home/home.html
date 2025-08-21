@@ -1,1 +1,20 @@
-<p>home works!</p>
+<body id="home-body">
+  <main id="home-main">
+    <button id="create-task-button" (click)="toggleForm()" type="button">
+      <span class="button-icon-container">
+        <span class="material-symbols-outlined" href="">add</span>
+      </span>
+      <span class="button-text">
+        <strong>Cadastrar Tarefa</strong>
+      </span>
+    </button>
+    <app-task-form
+      id="create-form"
+      *ngIf="showForm"
+      [title]="'Nova Tarefa'"
+      (formSubmitted)="hideForm()"
+      (formClosed)="hideForm()">
+    </app-task-form>
+    <app-task-board></app-task-board>
+  </main>
+</body>
