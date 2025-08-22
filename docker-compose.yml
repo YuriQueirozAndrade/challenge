@@ -1,0 +1,15 @@
+services:
+  api:
+    build: ./server
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+    network_mode: host
+  client:
+    build: ./client
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+    network_mode: host
