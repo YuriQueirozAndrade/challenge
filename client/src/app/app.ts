@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.css',
 })
 export class App implements OnInit {
-  protected readonly title = signal('seu_condominio');
+  protected readonly title = signal('client');
   private auth = inject(AuthService);
   private router = inject(Router);
   private session = inject(SessionStorageHandler);
