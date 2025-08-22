@@ -1,11 +1,11 @@
+import { IComment } from './IComment';
+
 export interface ITask {
   id: number;
   name: string;
-  startDate: Date;
-  userId: number;
-  createdAt: Date;
-  updatedAt: Date;
-  endDate?: Date;
+  start_date: string;
+  end_date?: string | null;
   cost?: number;
-  status: number;
+  status: string;
+  comments?: IComment[];
 }
