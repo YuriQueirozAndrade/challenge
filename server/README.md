@@ -16,7 +16,7 @@
 
 ### Database relation ships and properties
 
-- [ ] Create migration file with all rules and properties requeires
+- [x] Create migration file with all rules and properties requeires
 
 ### Controllers
 
@@ -24,12 +24,12 @@
 
 - [x] Create user
 
-- [ ] Get user by Id
-- [ ] Get user by Email
+- [x] Get user by Id
+- [x] Get user by Email
 
-- [ ] Update user by Id
+- [x] Update user by Id
 
-- [ ] Delete user by Id
+- [x] Delete user by Id
 
 - [x] User CRUD operations only owner account
 
@@ -57,7 +57,6 @@
 
 - [x] Non-Logged User
 - [x] Common User
-- [ ] Admin User
 
 #### Non-Users:
 
@@ -76,18 +75,8 @@
 
 #### Test
 
-- [ ] User Controller
-- [ ] Task Controller
-- [ ] Comment Controller
+- [x] User Controller
+- [x] Task Controller
+- [x] Comment Controller
 
 ---
-
-## Front End
-
-- [ ] Account forms
-- [ ] The Home page
-
-### Task Forms
-
-- [ ] Create Form
-- [ ] Edit Form
