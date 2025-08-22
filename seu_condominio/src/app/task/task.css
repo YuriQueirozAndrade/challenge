@@ -1,85 +1,100 @@
-/* Styling for the overall task card container */
 .task-card {
-  background-color: #e0e6e9; /* Re-added the background color */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
 }
 
-/* Hover effect for the entire card */
 .task-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-card-hover);
 }
 
-/* Styling for the header, which acts as a button */
-/* Styling for the task name text */
 .task-name {
   margin: 0;
   font-size: 1.1rem;
   font-weight: bold;
   color: #ffffff;
-  white-space: nowrap; /* Prevents the text from wrapping to the next line */
-  overflow: hidden; /* Hides any text that overflows its container */
-  text-overflow: ellipsis; /* Displays an ellipsis for the clipped text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Updated header styling to allow the task name to take available space */
 #task-header {
-  border-radius: 12px 12px 0 0;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+  min-width: var(--min-form-width);
+  cursor: point;
   gap: 10px;
-}
-.edit-button-container {
 }
 
 .edit-button {
-  background: linear-gradient(to top, #ffc107, #ff9800);
-  border: 1px solid #ff8f00;
+  background: linear-gradient(
+    to top,
+    var(--color-yellow-button-light),
+    var(--color-yellow-button-dark)
+  );
+  border: 1px solid var(--color-yellow-button-border);
   color: #ffffff;
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-button);
   transition: all 0.3s ease;
 }
 
 .edit-button:hover {
-  /* Reverse the gradient on hover for a nice effect */
-  background: linear-gradient(to top, #ff9800, #ffc107);
-}
-/* Styling for task status badges */
-.task-status {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: bold;
-  color: #fff;
-  white-space: nowrap;
+  background: linear-gradient(
+    to top,
+    var(--color-yellow-button-dark),
+    var(--color-yellow-button-light)
+  );
 }
 
-.status-0 {
-  background-color: #e74c3c;
+@media (max-width: 600px) {
+  .task-card {
+    width: auto;
+    min-width: auto;
+    max-width: 100%;
+    margin: 10px 0;
+  }
+
+  #task-header {
+    gap: 5px;
+    padding: 10px;
+    width: auto;
+    min-width: 400px;
+    max-width: 100%;
+  }
+
+  .task-name {
+    font-size: 1rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
 }
 
-.status-1 {
-  background-color: #f39c12;
-}
+@media (max-width: 400px) {
+  .task-card {
+    width: auto;
+  }
 
-.status-2 {
-  background-color: #27ae60;
-}
+  .task-name {
+    font-size: 0.9rem;
+  }
 
-/* Styling for task details */
-.task-details {
-  padding: 15px 20px;
-}
+  #task-header {
+    width: auto;
+    min-width: 260px;
+    max-width: 100%;
+  }
 
-.task-details p {
-  margin: 5px 0;
-  color: #555;
-  font-size: 0.85rem;
+  .edit-button {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
 }

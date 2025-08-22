@@ -23,9 +23,7 @@ export class Task implements OnInit {
     }
   }
 
-  // New method to toggle the view of details
   toggleView(): void {
-    // Only toggle the view if we are not in edit mode
     if (!this.isEditMode) {
       this.viewDetails = !this.viewDetails;
     }
