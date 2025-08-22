@@ -3,18 +3,20 @@
   flex-direction: column;
   align-items: end;
 }
+
 #home-main {
   display: flex;
   flex-direction: column;
   align-items: end;
-  margin: 20px;
-  gap: 20px;
+  margin: var(--space-lg);
+  gap: var(--space-lg);
 }
+
 #create-task-button {
   display: flex;
   align-items: stretch;
-  background-color: #f0f0f0;
-  border-radius: var(--border-radius);
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-card);
   padding: 0;
   cursor: pointer;
@@ -22,10 +24,11 @@
 }
 
 #create-task-button:hover {
-  background-color: #e6e6e6;
+  background-color: var(--color-gray-button-dark);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .material-symbols-outlined {
   font-variation-settings:
     'FILL' 0,
@@ -34,8 +37,9 @@
     'opsz' 4;
   color: white;
   -webkit-text-stroke: 2px white;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-lg);
 }
+
 .button-icon-container {
   background: linear-gradient(to top, var(--color-primary-dark) 0%, #0077c9 100%);
   width: 35px;
@@ -43,8 +47,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: var(--border-radius);
-  border-bottom-left-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius-lg);
+  border-bottom-left-radius: var(--border-radius-lg);
   box-shadow: 2px 0 3px rgba(0, 0, 0, 0.1) inset;
 }
 
@@ -55,9 +59,10 @@
 
 .button-text {
   padding: 10px 15px;
-  color: #333;
+  color: var(--color-text-dark);
 }
+
 #create-form {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-lg);
 }
