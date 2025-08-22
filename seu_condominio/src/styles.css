@@ -1,7 +1,51 @@
 :root {
+  /* Colors */
   --color-primary-dark: #004588;
-  --color-primary-light: #e0e6e9;
-  --border-radius: 10px;
+  --color-primary-light: #0077c9;
+  --color-text-dark: #333;
+  --color-text-medium: #555;
+  --color-bg-light: #e0e6e9;
+  --color-bg-white: #ffffff;
+  --color-border: #ccc;
+  --color-status-todo: #e74c3c;
+  --color-status-in-progress: #f39c12;
+  --color-status-completed: #27ae60;
+  --color-yellow-button-dark: #ff9800;
+  --color-yellow-button-light: #ffc107;
+  --color-yellow-button-border: #ff8f00;
+  --color-red-button-dark: #d32f2f;
+  --color-red-button-light: #f44336;
+  --color-red-button-border: #c62828;
+  --color-green-button-dark: #2e8b57;
+  --color-green-button-light: #4caf50;
+  --color-green-button-border: #28a745;
+  --color-gray-button-dark: #e0e0e0;
+  --color-gray-button-light: #f0f0f0;
+  --color-gray-button-border: #b0b0b0;
+
+  /* Spacing */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+
+  /* Dimensions */
+  --header-height: 60px;
+  --form-max-width: 500px;
+  --card-max-width: 900px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-button: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-form: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+  /* Borders & Radius */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 10px;
+  --min-form-width: 410px;
 }
 
 * {
@@ -11,17 +55,68 @@
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  box-sizing: border-box;
 }
 
-.default-header {
+.app-header-style {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 15px 20px;
-  background: linear-gradient(to top, var(--color-primary-dark) 0%, #0077c9 100%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: var(--space-lg);
+  background: linear-gradient(
+    to top,
+    var(--color-primary-dark) 0%,
+    var(--color-primary-light) 100%
+  );
   border: none;
-  cursor: pointer;
+  box-shadow: var(--shadow-inset);
+}
+.btn-back {
+  background: linear-gradient(
+    to top,
+    var(--color-gray-button-light),
+    var(--color-gray-button-dark)
+  );
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-gray-button-border);
+}
+
+.btn-back:hover {
+  background: linear-gradient(to top, var(--color-gray-button-dark), #d0d0d0);
+}
+
+.btn-save {
+  background: linear-gradient(
+    to top,
+    var(--color-green-button-light),
+    var(--color-green-button-dark)
+  );
+  color: white;
+  border: 1px solid var(--color-green-button-border);
+}
+
+.btn-save:hover {
+  background: linear-gradient(
+    to top,
+    var(--color-green-button-dark),
+    var(--color-green-button-light)
+  );
+}
+
+.btn-delete {
+  background: linear-gradient(to top, var(--color-red-button-light), var(--color-red-button-dark));
+  color: white;
+  border: 1px solid var(--color-red-button-border);
+}
+
+.btn-delete:hover {
+  background: linear-gradient(to top, var(--color-red-button-dark), var(--color-red-button-light));
+}
+
+#btn-logout {
+  display: flex;
+  flex-direction: rows;
+  gap: 10px;
 }

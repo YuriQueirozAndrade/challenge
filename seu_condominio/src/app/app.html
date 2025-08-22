@@ -1,15 +1,24 @@
-<header class="default-header" id="main-header">
-  <label class="hamburger-icon">
-    <span class="line"></span>
-    <span class="line"></span>
-    <span class="line"></span>
-  </label>
-  <img class="header-logo" src="assets/logo-header.png" alt="Logo da empresa" />
+<header class="app-header-style" id="main-header">
+  <div>
+    <label class="hamburger-icon">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </label>
+    <img class="header-logo" src="assets/logo.ico" alt="Logo da empresa" />
+  </div>
   <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add"
   />
+  <div *ngIf="user_name">
+    <p>{{ user_name }}</p>
+    <div>
+      <button id="btn-logout" class="btn-delete" (click)="logout()">
+      Sair
+      <img alt="" src="/assets/logout.svg">
+      </button>
+    </div>
+  </div>
 </header>
-<body id="default-body">
-  <router-outlet />
-</body>
+<router-outlet />
