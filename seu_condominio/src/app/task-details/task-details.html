@@ -1,0 +1,48 @@
+<div class="task-details">
+  <p><strong>Início:</strong> {{ task.start_date | date: 'short' }}</p>
+
+  <p *ngIf="task.end_date"><strong>Conclusão:</strong> {{ task.end_date | date: 'short' }}</p>
+
+  <p *ngIf="task.cost"><strong>Custo:</strong> R$ {{ task.cost }}</p>
+
+  <p>
+    <strong>Status da Tarefa:</strong>
+    <span class="task-status status-{{ task.status }}">
+      <ng-container [ngSwitch]="task.status">
+        <span *ngSwitchCase="'ongoing'">Em Progresso</span>
+        <span *ngSwitchCase="'done'">Concluída</span>
+        <span *ngSwitchDefault>Pendente</span>
+      </ng-container>
+    </span>
+  </p>
+</div>
+
+<div class="task-comments">
+  <h4>Comentários</h4>
+
+  <div *ngIf="task.comments && task.comments.length > 0">
+    <div *ngFor="let comment of task.comments" class="comment-item">
+      <p class="comment-text">{{ comment.text }}</p>
+      <div class="comment-meta">
+        <span>{{ comment.user_name }}</span>
+        <span>-</span>
+        <span>{{ comment.created_at | date: 'short' }}</span>
+      </div>
+<button
+    *ngIf="comment.user_id === sessionStorage.getAuthData()?.user?.id"
+    id="exclude-comment"
+    class="btn-delete"
+    (click)="onDeleteComment(comment.id)">
+    Excluir
+  </button>
+  </div>
+  </div>
+
+  <form class="add-comment" [formGroup]="commentForm" (submit)="onCreateComment()">
+    <textarea formControlName="text" placeholder="Adicione um comentário..." rows="3"></textarea>
+    <button class="btn-save btn-send-comment" type="submit" [disabled]="commentForm.invalid">
+    Enviar
+    </button>
+  </form>
+</div>
+
