@@ -1,18 +1,35 @@
 <body>
   <main id="form-container">
-    <form id="auth-form" action="/login" method="post">
+    <header class="app-header-style">
       <h1 class="form-title"><strong>Login</strong></h1>
+    </header>
+    <form id="auth-form" (ngSubmit)="onLogin()" #loginForm="ngForm">
       <div>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Digite seu e-mail"
+          [(ngModel)]="email"
+          required
+        />
       </div>
-
       <div>
         <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" placeholder="Sua senha" required />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Sua senha"
+          [(ngModel)]="password"
+          required
+        />
       </div>
-
-      <button type="submit">Entrar</button>
+      <button type="submit" [disabled]="!loginForm.form.valid">Entrar</button>
+      <div class="register-link-container">
+        <a class="register-link" href="/register">Ainda não tem uma conta? Cadastre-se</a>
+      </div>
     </form>
   </main>
 </body>
