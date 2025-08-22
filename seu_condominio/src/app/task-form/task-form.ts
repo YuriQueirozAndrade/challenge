@@ -1,8 +1,9 @@
-// task-form.ts
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit, inject } from '@angular/core';
+import { ApiHandler } from '../api-handler';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ITask } from '../ITask'; // Import the interface
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ITask } from '../ITask';
+import { IComment } from '../IComment';
 
 @Component({
   selector: 'app-task-form',
@@ -12,59 +13,89 @@ import { ITask } from '../ITask'; // Import the interface
   styleUrl: './task-form.css',
 })
 export class TaskForm implements OnInit {
-  // Implement OnInit
+  private api = inject(ApiHandler);
+  showDeleteConfirmation: boolean = false;
   @Output() formClosed = new EventEmitter<void>();
-  @Output() formSubmitted = new EventEmitter<void>();
+  @Output() formSubmitted = new EventEmitter<ITask>();
+  @Output() taskDeleted = new EventEmitter<number>();
 
   @Input() title: string = '';
   @Input() isEditMode: boolean = false;
-  // Add the new input to receive the task data
-  @Input() task!: ITask;
+  @Input() task?: ITask;
 
   taskForm = new FormGroup({
-    taskName: new FormControl(''),
-    startDate: new FormControl(''),
+    taskName: new FormControl('', Validators.required),
+    startDate: new FormControl(new Date().toISOString().substring(0, 10), Validators.required),
     endDate: new FormControl(''),
-    estimatedCost: new FormControl(''), // This control expects a string
-    taskStatus: new FormControl(''),
+    estimatedCost: new FormControl(''),
+    taskStatus: new FormControl('pending'),
   });
 
   ngOnInit(): void {
     if (this.isEditMode && this.task) {
       this.taskForm.patchValue({
         taskName: this.task.name,
-        startDate: this.task.startDate?.toISOString().split('T')[0],
-        endDate: this.task.endDate?.toISOString().split('T')[0],
-        // Convert the number to a string
-        estimatedCost: this.task.cost?.toString(),
-        taskStatus: this.getTaskStatusString(this.task.status),
+        startDate: this.task.start_date,
+        endDate: this.task.end_date,
+        estimatedCost: this.task.cost?.toString() || '',
+        taskStatus: this.task.status,
       });
     }
   }
-  onSubmit() {
-    console.log(this.taskForm.value);
-    this.formSubmitted.emit();
-  }
 
-  onClose() {
-    this.formClosed.emit();
-  }
+  onSubmit(): void {
+    if (this.taskForm.valid) {
+      const formValue = this.taskForm.value;
+      const newTask: ITask = {
+        id: this.isEditMode && this.task ? this.task.id : Date.now(),
+        name: formValue.taskName || '',
+        start_date: formValue.startDate || '',
+        end_date: formValue.endDate || null,
+        cost: formValue.estimatedCost ? parseInt(formValue.estimatedCost) : undefined,
+        status: formValue.taskStatus || 'pending',
+        comments: this.isEditMode && this.task ? this.task.comments : [],
+      };
 
-  onDelete() {
-    this.formClosed.emit();
-  }
-
-  // Helper function to convert the status number to a string for the form
-  private getTaskStatusString(status: number): string {
-    switch (status) {
-      case 1:
-        return 'pending';
-      case 2:
-        return 'in-progress';
-      case 3:
-        return 'completed';
-      default:
-        return '';
+      this.formSubmitted.emit(newTask);
+      if (!this.isEditMode) {
+        this.api.postTask(newTask).subscribe(() => {
+          console.log('Post : ', newTask);
+          this.onClose();
+        });
+      } else {
+        if (this.task) {
+          this.api.putTask(this.task.id, newTask).subscribe(() => {
+            console.log('Put : ', newTask);
+            this.onClose();
+          });
+        }
+      }
+      this.taskForm.reset();
+      this.onClose();
+    } else {
+      console.error('Form is invalid. Please fill in all required fields.');
     }
+  }
+
+  onClose(): void {
+    this.formClosed.emit();
+  }
+
+  onDelete(): void {
+    this.showDeleteConfirmation = true;
+  }
+
+  confirmDelete(): void {
+    if (this.task?.id) {
+      this.taskDeleted.emit(this.task.id);
+      this.api.deleteTask(this.task.id).subscribe(() => {
+        this.showDeleteConfirmation = false;
+        this.onClose();
+      });
+    }
+  }
+
+  cancelDelete(): void {
+    this.showDeleteConfirmation = false;
   }
 }

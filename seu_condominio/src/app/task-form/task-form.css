@@ -1,31 +1,19 @@
 .task-form-container {
   background-color: #e0e6e9;
-  border-radius: 12px;
+  border-radius: 0 0 12px 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   padding: 0 20px 20px;
   gap: 20px;
-  width: 90%;
   max-width: 500px;
+  min-width: var(--min-form-width);
+  margin: 0 auto;
 }
 
 #task-header {
-  box-shadow: var(--shadow-inset-header);
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
-  margin: 0 -20px 20px;
-}
-
-.task-form-container {
-  background-color: #e0e6e9;
-  border-radius: 12px;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  padding: 0 20px 20px;
-  gap: 20px;
-  width: 90%;
-  max-width: 500px;
+  box-shadow: var(--shadow-inset);
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
 }
 
 #task-header .header-text {
@@ -34,23 +22,25 @@
   color: white;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
+
 .form-field {
-  margin-bottom: 16px;
+  margin-top: 10px;
+  margin-bottom: var(--space-md);
 }
 
 .form-field label {
   display: block;
   font-weight: 600;
-  margin-bottom: 8px;
-  color: #555;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-medium);
 }
 
 .form-field input,
 .form-field select {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
   box-sizing: border-box;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   background-color: #f7f7f7;
@@ -58,8 +48,8 @@
 
 .date-fields {
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
 }
 
 .date-field {
@@ -68,57 +58,121 @@
   align-items: center;
   flex: 1;
 }
+
 .date-field input {
   border-radius: 5px;
   margin: 5px;
+  height: 25px;
+}
+
+.date-field input:hover {
+  border-color: var(--color-primary-light);
+}
+
+.date-field input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.2);
 }
 
 .form-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 24px;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
 }
 
 .form-actions button {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
   padding: 10px 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-button);
 }
 
-.btn-back {
-  background: linear-gradient(to top, #f0f0f0, #e0e0e0);
-  color: #333;
-  border: 1px solid #b0b0b0;
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.btn-back:hover {
-  background: linear-gradient(to top, #e0e0e0, #d0d0d0);
+.confirmation-dialog {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  margin: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
 }
 
-.btn-save {
-  background: linear-gradient(to top, #4caf50, #2e8b57);
+.confirmation-dialog p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-confirm-yes,
+.btn-confirm-no {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-confirm-yes {
+  background-color: #dc3545;
   color: white;
-  border: 1px solid #28a745;
 }
 
-.btn-save:hover {
-  background: linear-gradient(to top, #2e8b57, #4caf50);
-}
-
-/* New CSS for the 'Excluir' button */
-.btn-delete {
-  background: linear-gradient(to top, #f44336, #d32f2f); /* Red gradient */
+.btn-confirm-no {
+  background-color: #6c757d;
   color: white;
-  border: 1px solid #c62828; /* Darker red border */
 }
 
-.btn-delete:hover {
-  background: linear-gradient(to top, #d32f2f, #f44336); /* Reversed gradient on hover */
+@media (max-width: 600px) {
+  .task-form-container {
+    max-width: 100%;
+    min-width: auto;
+    margin: 0;
+    border-radius: 0;
+    padding: 10px;
+    box-shadow: none;
+  }
+
+  .date-fields {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .confirmation-dialog {
+    margin: 10px;
+    padding: 15px;
+  }
 }

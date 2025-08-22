@@ -1,7 +1,7 @@
+<header class="app-header-style" id="task-header">
+  <span class="header-text">{{ title }}</span>
+</header>
 <div class="task-form-container">
-  <header class="default-header" id="task-header">
-    <span class="header-text">{{ title }}</span>
-  </header>
   <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
     <div class="form-field">
       <label for="taskName">Nome da Tarefa:</label>
@@ -29,24 +29,38 @@
       <select id="taskStatus" formControlName="taskStatus">
         <option value="">Selecione...</option>
         <option value="pending">Pendente</option>
-        <option value="in-progress">Em Progresso</option>
-        <option value="completed">Concluída</option>
+        <option value="ongoing">Em Progresso</option>
+        <option value="done">Concluída</option>
       </select>
     </div>
 
     <footer class="form-actions">
       <button type="button" (click)="onClose()" class="btn-back">
-        <img src="" alt="" />
+        <img alt="" src="/assets/arrow_back.svg" />
         Voltar
       </button>
-      <button type="button" (click)="onDelete()" class="btn-delete" *ngIf="isEditMode">
-        <img src="" alt="" />
+      <button
+        type="button"
+        (click)="onDelete()"
+        class="btn-delete"
+        *ngIf="isEditMode && !showDeleteConfirmation"
+      >
+        <img alt="" src="/assets/delete.svg" />
         Excluir
       </button>
-      <button type="submit" class="btn-save">
-        <img src="" alt="" />
+      <button type="submit" class="btn-save" *ngIf="!showDeleteConfirmation">
+        <img alt="" src="/assets/save.svg" />
         Salvar
       </button>
     </footer>
   </form>
+  <div *ngIf="showDeleteConfirmation" class="confirmation-overlay">
+    <div class="confirmation-dialog">
+      <p>Tem certeza de que deseja excluir esta tarefa?</p>
+      <div class="confirmation-buttons">
+        <button (click)="confirmDelete()" class="btn-confirm-yes">Sim</button>
+        <button (click)="cancelDelete()" class="btn-confirm-no">Não</button>
+      </div>
+    </div>
+  </div>
 </div>
